@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>vCommute</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+	<script type="text/javascript">
+		function submitData(){
+			var rname = $("#routeName").val();
+			var rlat = $("#txtLat").val();
+			var rlang = $("#txtLang").val();
+			var obj = {"name": rname, "lat": rlat, "lang": rlang};
+			console.log(obj);
+			$.ajax({
+			  type: "POST",
+			  url: 'http://localhost:5566/stop',
+			  contentType: "application/json",
+			  data: JSON.stringify(obj)
+			});
+		};
+	
+	</script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">Customise</a>
+		 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link active" href="#">Stops</a><span class="sr-only"></span>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Routes</a><span class="sr-only"></span>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Mapping</a><span class="sr-only"></span>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="form-group col-sm-3">
+		<form>
+		  <div class="form-group">
+			<label for="exampleInputEmail1">Route Name</label>
+			<input type="text" class="form-control" id="routeName"  placeholder="Enter Route Name">
+		  </div>
+		 <div class="form-group">
+			<label for="exampleInputEmail1">Route Lat</label>
+			<input type="text" class="form-control" id="txtLat"  placeholder="Enter Route's Latitude">
+		  </div>
+		 <div class="form-group">
+			<label for="exampleInputEmail1">Route Lang</label>
+			<input type="text" class="form-control" id="txtLang"  placeholder="Enter Route's Longitude">
+		  </div>
+		  <button type="submit" class="btn btn-primary" onclick=" submitData();">Submit</button>
+		</form>
+	</div>
+	
+</body>
+</html>
